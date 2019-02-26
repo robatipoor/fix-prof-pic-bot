@@ -10,7 +10,7 @@ func scheduledTask() {
 
 	s := gocron.NewScheduler()
 	s.Every(30).Minutes().Do(func() {
-		s, err := get("https://queenangel.herokuapp.com/")
+		s, err := get("https://fixtelegramprofilepicturebot.herokuapp.com/")
 		if err != nil {
 			log.Println(err)
 		}
