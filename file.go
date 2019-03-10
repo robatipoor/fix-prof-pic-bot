@@ -19,7 +19,7 @@ func getFile(fileID string) []byte {
 	}
 	url := fmt.Sprintf("https://api.telegram.org/bot%s/getFile?file_id=%s",
 		token, fileID)
-	b,err := get(url)
+	b,err := getRequest(url)
 	log.Println("ok get file info")
 	err = json.Unmarshal(b, &file)
 	if err != nil {
@@ -28,7 +28,7 @@ func getFile(fileID string) []byte {
 	log.Println("ok unmarshal file")
 	url = fmt.Sprintf("https://api.telegram.org/file/bot%s/%s",
 		token, file.Result.FilePath)
-	b,err = get(url)
+	b,err = getRequest(url)
 	log.Println("ok get file")
 	
 	return b

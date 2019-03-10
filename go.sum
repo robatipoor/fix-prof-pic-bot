@@ -9,3 +9,5 @@ golang.org/x/image v0.0.0-20190118043309-183bebdce1b2 h1:FNSSV4jv1PrPsiM2iKGpqLP
 golang.org/x/image v0.0.0-20190118043309-183bebdce1b2/go.mod h1:ux5Hcp/YLpHSI86hEcLt0YII63i6oz57MZXIpbrjZUs=
 gopkg.in/tucnak/telebot.v2 v2.0.0-20190106130618-430758b3741d h1:02+oNUB6FaBF38LdXLa8zrFUqqB5SEH8OBt3vQNy36s=
 gopkg.in/tucnak/telebot.v2 v2.0.0-20190106130618-430758b3741d/go.mod h1:EmWSFwexO5JPTHiU7gDd9HMCCiyatACwO0HhuKNsOd0=
+gopkg.in/tucnak/telebot.v2 v2.0.0-20190213110836-e6cfaa833930 h1:iBc9Wv0kN3j0qRzHQH+BKOuRdEVu/z4QuK0YN2p9pro=
+gopkg.in/tucnak/telebot.v2 v2.0.0-20190213110836-e6cfaa833930/go.mod h1:EmWSFwexO5JPTHiU7gDd9HMCCiyatACwO0HhuKNsOd0=
