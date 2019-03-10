@@ -1,4 +1,4 @@
-module github.com/robatipoor/fix-tel-img-prof-bot
+module github.com/robatipoor/fix-prof-pic-bot
 
 require (
 	github.com/disintegration/imaging v1.5.0
