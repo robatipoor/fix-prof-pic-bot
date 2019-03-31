@@ -1,1 +1,2 @@
-### crop profile picture telegram bot
+### fix profile picture telegram bot
+[fixprofile](https://t.me/fixprofilebot)

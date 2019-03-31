@@ -1,39 +1,56 @@
 package main
 
 import (
-	"fmt"
+	"bytes"
 	"log"
-	"net/http"
 	"os"
+
+	tb "gopkg.in/tucnak/telebot.v2"
 )
 
+var port string
 var token string
-var address string
+var appURL string
 
 func init() {
-	token = os.Getenv("TELEGRAM_TOKEN")
-	if token == "" {
-		log.Fatalln("Port Not Set !")
-	}
-	port := os.Getenv("PORT")
+	port = os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
-		log.Println("Set Port Number = ", port)
 	}
-	address = "0.0.0.0:" + port
+	appURL = os.Getenv("APP_URL")
+	if appURL == "" {
+		log.Fatal("Application URL not set")
+	}
+	token = os.Getenv("TELEGRAM_TOKEN")
+	if token == "" {
+		log.Fatalln("TELEGRAM_TOKEN not set !")
+	}
 }
 
 func main() {
 
-	bot := handelBot()
-	go bot.Start()
-	http.HandleFunc("/", handler)
-	log.Println("Start Server : ", address)
-	log.Fatal(http.ListenAndServe(address, nil))
+	webhook := &tb.Webhook{
+		Listen:   ":" + port,
+		Endpoint: &tb.WebhookEndpoint{PublicURL: appURL},
+	}
+	setings := tb.Settings{
+		Token:  token,
+		Poller: webhook,
+	}
+	bot, err := tb.NewBot(setings)
+	if err != nil {
+		log.Fatal(err)
+	}
+	bot.Handle(tb.OnPhoto, func(m *tb.Message) {
+		b, err := fixSizeImage(getFile(m.Photo.FileID))
+		if err != nil {
+			log.Fatalln(err)
+		}
+		log.Println("ok fixed size image")
+		ph := &tb.Photo{File: tb.FromReader(bytes.NewBuffer(b))}
+		bot.Send(m.Sender, ph)
+	})
 
-}
-
-func handler(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-	fmt.Fprintln(w, "Start Bot !")
+	log.Println("Bot Start ...")
+	bot.Start()
 }
